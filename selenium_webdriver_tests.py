@@ -2,6 +2,7 @@ import time
 import unittest
 
 from selenium import webdriver
+from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.support.select import Select
@@ -14,6 +15,7 @@ class TestSeleniumWebDriver(unittest.TestCase):
         s = Service(ChromeDriverManager().install())
         self.driver = webdriver.Chrome(service=s)
         self.driver.get(url="http://automationpractice.com/index.php")
+        self.driver.maximize_window()
         self.driver.implicitly_wait(15)
 
     def tearDown(self) -> None:
@@ -68,11 +70,34 @@ class TestSeleniumWebDriver(unittest.TestCase):
 
         # time.sleep(5)
 
+    def test_add_to_cart(self):
+        self.driver.find_element(By.ID, "search_query_top").send_keys("Dress")
+        self.driver.find_element(By.XPATH, "//button[@name='submit_search']").click()
+        time.sleep(5)
+        self.driver.find_element(By.CLASS_NAME, "icon-th-list").click()
+        self.assertTrue(self.driver.find_element(By.ID, "center_column"))
+        nodes = self.driver.find_elements(By.XPATH, "//ul[@class='product_list row list']/li")
+        self.assertTrue(len(nodes) > 0)
+        self.driver.find_element(By.XPATH, "//span[text()='Add to cart']").click()
+        self.assertTrue(self.driver.find_element(By.ID, "layer_cart"))
+        time.sleep(3)
+        self.driver.find_element(By.XPATH, "//*[@title='Continue shopping']/span").click()
 
+        self.hover_cart = self.driver.find_element(By.XPATH, "//a[@title='View my shopping cart']")
+        self.action = ActionChains(self.driver)
+        self.action.move_to_element(self.hover_cart)
+        time.sleep(3)
+        self.action.perform()
+        self.assertTrue(self.driver.find_element(By.CSS_SELECTOR, ".products > .first_item"))
 
+        self.hover_checkout_button = self.driver.find_element(By.CSS_SELECTOR, "#button_order_cart")
+        self.action.click(self.hover_checkout_button)
+        self.action.perform()
 
-
-
+        self.assertTrue(self.driver.current_url == "http://automationpractice.com/index.php?controller=order")
+        self.quantity = self.driver.find_element(By.CSS_SELECTOR, ".cart_quantity_input").get_attribute("value")
+        self.assertEquals(int(self.quantity), 1)
+        print(self.quantity)
 
 
 if __name__ == '_main_':
