@@ -22,18 +22,20 @@ class TestSeleniumWebDriver(unittest.TestCase):
         self.driver.quit()
 
     def test_search(self):
-        # search field
+        # search field - OK
         self.driver.find_element(By.ID, "search_query_top").send_keys("Printed dress")
         # time.sleep(6)
-        # search field: elastic search
+        # search field: elastic search - OK
         elastic_search = self.driver.find_elements(By.CSS_SELECTOR, ".ac_results > ul > li")
         self.assertEqual(len(elastic_search), 5)
-        # search field: search button
+        # search field: search button - OK
         self.driver.find_element(By.XPATH, "//button[@name='submit_search']").click()
         # search page
         self.assertTrue(self.driver.title == 'Search - My Store')
         self.assertTrue(self.driver.find_element(By.ID, "center_column"))
-        nodes = self.driver.find_elements(By.XPATH, "//ul[@class='product_list grid row']/li")
+        time.sleep(5)
+        self.driver.find_element(By.CLASS_NAME, "icon-th-list").click()
+        nodes = self.driver.find_elements(By.XPATH, "//ul[@class='product_list row list']/li")
         self.assertEqual(len(nodes), 5)
         # print(len(nodes))
         # time.sleep(20)
@@ -43,10 +45,10 @@ class TestSeleniumWebDriver(unittest.TestCase):
         self.driver.find_element(By.XPATH, "//a[@class='login']").click()
 
         # authorization page: email field
-        self.driver.find_element(By.ID, "email_create").send_keys("otsfake+04@gmail.com")
+        self.driver.find_element(By.ID, "email_create").send_keys("otsfake+08@gmail.com")
         self.driver.find_element(By.ID, "SubmitCreate").click()
         # registration form: data fields and buttons
-        self.assertTrue(self.driver.title == 'Login - My Store')
+        # self.assertTrue(self.driver.title == 'Login - My Store')
         self.driver.find_element(By.ID, "id_gender1").click()
         self.driver.find_element(By.ID, "customer_firstname").send_keys("firstName")
         self.driver.find_element(By.ID, "customer_lastname").send_keys("LastName")
@@ -73,19 +75,20 @@ class TestSeleniumWebDriver(unittest.TestCase):
         self.driver.find_element(By.ID, "submitAccount").click()
         # account page:
         self.assertTrue(self.driver.current_url == "http://automationpractice.com/index.php?controller=my-account")
-        # authorization page: user name displayed and logout button
+        # authorization header: user name displayed and logout button
         self.assertTrue(self.driver.find_element(By.XPATH, "//span[text()='firstName LastName']"))
         self.driver.find_element(By.XPATH, "//*[@title='Log me out']").click()
-        self.assertTrue(self.driver.find_element(By.XPATH, "//*[@title='Log in to your customer account']"))
+        # self.assertTrue(self.driver.find_element(By.XPATH, "//*[@title='Log in to your customer account']"))
+        self.assertTrue(self.driver.find_element(By.XPATH, "//a[@class='login']"))
 
         # time.sleep(5)
 
     def test_add_to_cart(self):
-        # search field: send keys & button
+        # search field: send keys & button - OK
         self.driver.find_element(By.ID, "search_query_top").send_keys("Dress")
         self.driver.find_element(By.XPATH, "//button[@name='submit_search']").click()
         time.sleep(5)
-        # search page: change view icon
+        # search page: change view icon - OK
         self.driver.find_element(By.CLASS_NAME, "icon-th-list").click()
         self.assertTrue(self.driver.find_element(By.ID, "center_column"))
         nodes = self.driver.find_elements(By.XPATH, "//ul[@class='product_list row list']/li")
@@ -94,20 +97,23 @@ class TestSeleniumWebDriver(unittest.TestCase):
         self.driver.find_element(By.XPATH, "//span[text()='Add to cart']").click()
         self.assertTrue(self.driver.find_element(By.ID, "layer_cart"))
         time.sleep(3)
+        # closing cart popup
         self.driver.find_element(By.XPATH, "//*[@title='Continue shopping']/span").click()
-
+        # hover the cart
         self.hover_cart = self.driver.find_element(By.XPATH, "//a[@title='View my shopping cart']")
         self.action = ActionChains(self.driver)
         self.action.move_to_element(self.hover_cart)
         time.sleep(3)
-        self.action.perform()
-        self.assertTrue(self.driver.find_element(By.CSS_SELECTOR, ".products > .first_item"))
-
+        # self.action.perform()
+        product_in_cart = self.driver.find_element(By.CSS_SELECTOR, ".products > .first_item")
+        self.assertTrue(product_in_cart)
         self.hover_checkout_button = self.driver.find_element(By.CSS_SELECTOR, "#button_order_cart")
         self.action.click(self.hover_checkout_button)
         self.action.perform()
         # order page
+        # check url
         self.assertTrue(self.driver.current_url == "http://automationpractice.com/index.php?controller=order")
+        # check product quantity
         self.quantity = self.driver.find_element(By.CSS_SELECTOR, ".cart_quantity_input").get_attribute("value")
         self.assertEquals(int(self.quantity), 1)
         print(self.quantity)
