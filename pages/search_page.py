@@ -15,10 +15,10 @@ class SearchPage:
         return self.driver.title == self.__PAGE_TITLE
 
     def check_search_results_section(self):
-        return self.driver.find_element(self.__RESULT_SECTION)
+        return self.driver.find_element(*self.__RESULT_SECTION)
 
     def results_found_number(self):
-        self.driver.find_element(self.__LIST_VIEW).click()
-        return self.driver.find_elements(self.__ITEMS_FOUND_NUMBER)
+        self.driver.find_element(*self.__LIST_VIEW).click()
+        return self.driver.find_elements(*self.__ITEMS_FOUND_NUMBER)
 
 

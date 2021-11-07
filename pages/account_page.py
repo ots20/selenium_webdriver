@@ -10,5 +10,5 @@ class AccountPage:
     __ACCOUNT_PAGE_URL = 'http://automationpractice.com/index.php?controller=my-account'
 
     def check_account_page(self):
-        self.driver.current_url = self.__ACCOUNT_PAGE_URL
-
+        if self.driver.current_url == self.__ACCOUNT_PAGE_URL:
+            return True

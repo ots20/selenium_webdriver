@@ -11,10 +11,10 @@ class SearchField:
     __SEARCH_BUTTON = (By. XPATH, "//button[@name='submit_search']")
 
     def search_item(self):
-        self.driver.find_element(self.__SEARCH_FIELD).send_keys("Printed dress")
+        self.driver.find_element(*self.__SEARCH_FIELD).send_keys("Printed dress")
 
     def elastic_search_check(self):
-        return self.driver.find_elements(self.__ELASTIC_SEARCH)
+        return self.driver.find_elements(*self.__ELASTIC_SEARCH)
 
     def click_search_icon(self):
-        self.driver.find_element(self.__SEARCH_BUTTON).click()
+        self.driver.find_element(*self.__SEARCH_BUTTON).click()
