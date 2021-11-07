@@ -4,11 +4,13 @@ import random
 
 from selenium.webdriver.common.by import By
 
+from pages.base_page import BasePage
 
-class AuthorizationPage:
 
-    def __init__(self, driver):
-        self.driver = driver
+class AuthorizationPage(BasePage):
+
+    # def __init__(self, driver):
+    #     self.driver = driver
 
     __EMAIL_FIELD = (By.ID, "email_create")
     __SUBMIT_BUTTON = (By.ID, "SubmitCreate")

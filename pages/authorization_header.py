@@ -1,10 +1,12 @@
 from selenium.webdriver.common.by import By
 
+from pages.base_page import BasePage
 
-class AuthorizationHeader:
 
-    def __init__(self, driver):
-        self.driver = driver
+class AuthorizationHeader(BasePage):
+
+    # def __init__(self, driver):
+    #     self.driver = driver
 
     __SIGN_IN_BUTTON = (By.XPATH, "//a[@class='login']")
     __USER_NAME = (By.XPATH, "//span[text()='firstName LastName']")

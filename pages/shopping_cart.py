@@ -1,11 +1,13 @@
 from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 
+from pages.base_page import BasePage
 
-class ShoppingCart:
 
-    def __init__(self, driver):
-        self.driver = driver
+class ShoppingCart(BasePage):
+
+    # def __init__(self, driver):
+    #     self.driver = driver
 
     __PRODUCT_IN_CART = (By.CSS_SELECTOR, ".products > .first_item")
     __ADD_TO_CART_BUTTON = (By.XPATH, "//span[text()='Add to cart']")

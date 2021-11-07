@@ -1,11 +1,13 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
 
+from pages.base_page import BasePage
 
-class RegistrationForm:
 
-    def __init__(self, driver):
-        self.driver = driver
+class RegistrationForm(BasePage):
+
+    # def __init__(self, driver):
+    #     self.driver = driver
 
     __GENDER_SELECT = (By.ID, "id_gender1")
     __FIRST_NAME = (By.ID, "customer_firstname")

@@ -21,23 +21,19 @@ from pages.shopping_cart import ShoppingCart
 class TestSeleniumWebDriver(unittest.TestCase):
 
     def setUp(self) -> None:
-        s = Service(ChromeDriverManager().install())
-        self.driver = webdriver.Chrome(service=s)
-        self.driver.get(url="http://automationpractice.com/index.php")
-        self.driver.maximize_window()
-        self.driver.implicitly_wait(15)
+        self.search_field = SearchField()
+        self.search_page = SearchPage()
+        self.authorization_header = AuthorizationHeader()
+        self.authorization_page = AuthorizationPage()
+        self.account_page = AccountPage()
+        self.registration_form = RegistrationForm()
+        self.shopping_cart = ShoppingCart()
+        self.order_page = OrderPage()
 
-        self.search_field = SearchField(driver=self.driver)
-        self.search_page = SearchPage(driver=self.driver)
-        self.authorization_header = AuthorizationHeader(driver=self.driver)
-        self.authorization_page = AuthorizationPage(driver=self.driver)
-        self.account_page = AccountPage(driver=self.driver)
-        self.registration_form = RegistrationForm(driver=self.driver)
-        self.shopping_cart = ShoppingCart(driver=self.driver)
-        self.order_page = OrderPage(driver=self.driver)
+        self.search_page.go_to_url(url='http://automationpractice.com/index.php')
 
     def tearDown(self) -> None:
-        self.driver.quit()
+        self.search_field.quit_driver()
 
     def test_search(self):
         # search field - OK
@@ -102,11 +98,13 @@ class TestSeleniumWebDriver(unittest.TestCase):
         # closing cart popup
         self.shopping_cart.close_cart_popup()
         # hover the cart
-        self.hover_cart = self.driver.find_element(By.XPATH, "//a[@title='View my shopping cart']")
-        self.action = ActionChains(self.driver)
-        self.action.move_to_element(self.hover_cart)
-        time.sleep(3)
-        self.action.perform()
+        # self.hover_cart = self.driver.find_element(By.XPATH, "//a[@title='View my shopping cart']")
+        # self.action = ActionChains(self.driver)
+        # self.action.move_to_element(self.hover_cart)
+        # time.sleep(3)
+        # self.action.perform()
+        self.shopping_cart.hover_on_cart()
+
         # asserting there is a product in the cart
         self.assertTrue(self.shopping_cart.check_product_in_hover())
         time.sleep(3)

@@ -1,10 +1,12 @@
 from selenium.webdriver.common.by import By
 
+from pages.base_page import BasePage
 
-class OrderPage:
 
-    def __init__(self, driver):
-        self.driver = driver
+class OrderPage(BasePage):
+
+    # def __init__(self, driver):
+    #     self.driver = driver
 
     __ORDER_URL = "http://automationpractice.com/index.php?controller=order"
     __ORDER_PRODUCT_QUANTITY = (By.CSS_SELECTOR, ".cart_quantity_input")
