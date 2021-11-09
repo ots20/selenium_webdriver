@@ -12,9 +12,10 @@ class OrderPage(BasePage):
     __ORDER_PRODUCT_QUANTITY = (By.CSS_SELECTOR, ".cart_quantity_input")
 
     def check_url(self):
-        if self.driver.current_url == self.__ORDER_URL:
+        if self.get_current_url() == self.__ORDER_URL:
             return True
 
     def check_product_quantity(self):
-        quantity = self.driver.find_element(*self.__ORDER_PRODUCT_QUANTITY).get_attribute("value")
+        # quantity = self.driver.find_element(*self.__ORDER_PRODUCT_QUANTITY).get_attribute("value")
+        quantity = self.get_element_attribute(self.__ORDER_PRODUCT_QUANTITY, 'value')
         return int(quantity)

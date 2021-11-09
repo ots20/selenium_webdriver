@@ -19,5 +19,7 @@ class AuthorizationPage(BasePage):
     def register_email(self):
         letters = string.digits
         email_number = ''.join(random.choice(letters) for i in range(3))
-        self.driver.find_element(*self.__EMAIL_FIELD).send_keys('otsfake7+{}@gmail.com'.format(email_number))
-        self.driver.find_element(*self.__SUBMIT_BUTTON).click()
+        # self.driver.find_element(*self.__EMAIL_FIELD).send_keys('otsfake7+{}@gmail.com'.format(email_number))
+        # self.driver.find_element(*self.__SUBMIT_BUTTON).click()
+        self.fill(self.__EMAIL_FIELD, 'otsfake7+{}@gmail.com'.format(email_number))
+        self.click(self.__SUBMIT_BUTTON)

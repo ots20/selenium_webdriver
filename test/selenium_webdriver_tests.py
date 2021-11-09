@@ -97,13 +97,10 @@ class TestSeleniumWebDriver(unittest.TestCase):
         time.sleep(3)
         # closing cart popup
         self.shopping_cart.close_cart_popup()
+        time.sleep(3)
         # hover the cart
-        # self.hover_cart = self.driver.find_element(By.XPATH, "//a[@title='View my shopping cart']")
-        # self.action = ActionChains(self.driver)
-        # self.action.move_to_element(self.hover_cart)
-        # time.sleep(3)
-        # self.action.perform()
-        self.shopping_cart.hover_on_cart()
+        # self.shopping_cart.hover_on_cart()
+        # self.shopping_cart.hover_2()
 
         # asserting there is a product in the cart
         self.assertTrue(self.shopping_cart.check_product_in_hover())
@@ -113,8 +110,54 @@ class TestSeleniumWebDriver(unittest.TestCase):
         self.order_page.check_url()
         # check product quantity
         self.quantity = self.order_page.check_product_quantity()
-        print(self.quantity)
+        self.assertEqual(self.quantity, 1)
+
+
+class TestTempHover(unittest.TestCase):
+
+    def setUp(self) -> None:
+        s = Service(ChromeDriverManager().install())
+        self.driver = webdriver.Chrome(service=s)
+        self.driver.get(url="http://automationpractice.com/index.php")
+        self.driver.maximize_window()
+        self.driver.implicitly_wait(15)
+        self.order_page = OrderPage()
+
+    def test_add_to_cart_temp(self):
+        # search field: send keys & button - OK
+        self.driver.find_element(By.ID, "search_query_top").send_keys("Dress")
+        self.driver.find_element(By.XPATH, "//button[@name='submit_search']").click()
+        time.sleep(5)
+        # search page: change view icon - OK
+        self.driver.find_element(By.CLASS_NAME, "icon-th-list").click()
+        self.assertTrue(self.driver.find_element(By.ID, "center_column"))
+        nodes = self.driver.find_elements(By.XPATH, "//ul[@class='product_list row list']/li")
+        self.assertTrue(len(nodes) > 0)
+        # add to cart function: buttons, modal, shopping cart, shopping cart element
+        self.driver.find_element(By.XPATH, "//span[text()='Add to cart']").click()
+        self.assertTrue(self.driver.find_element(By.ID, "layer_cart"))
+        time.sleep(3)
+        # closing cart popup
+        self.driver.find_element(By.XPATH, "//*[@title='Continue shopping']/span").click()
+        # hover the cart
+        self.hover_cart = self.driver.find_element(By.XPATH, "//a[@title='View my shopping cart']")
+        self.action = ActionChains(self.driver)
+        self.action.move_to_element(self.hover_cart)
+        time.sleep(3)
+        self.action.perform()
+        product_in_cart = self.driver.find_element(By.CSS_SELECTOR, ".products > .first_item")
+        self.assertTrue(product_in_cart)
+        self.driver.find_element(By.CSS_SELECTOR, "#button_order_cart").click()
+        time.sleep(3)
+        # order page
+        # check url
+        self.assertTrue(self.driver.current_url == "http://automationpractice.com/index.php?controller=order")
+        # check product quantity
+        self.quantity = self.driver.find_element(By.CSS_SELECTOR, ".cart_quantity_input").get_attribute("value")
+        # self.quantity = self.order_page.check_product_quantity()
+        self.assertEquals(int(self.quantity), 1)
 
 
 if __name__ == '_main_':
     unittest.main()
+

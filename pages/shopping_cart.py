@@ -17,15 +17,15 @@ class ShoppingCart(BasePage):
     __CART_CHECKOUT_BUTTON = (By.CSS_SELECTOR, "#button_order_cart")
 
     def add_to_cart(self):
-        self.driver.find_element(*self.__ADD_TO_CART_BUTTON).click()
-        return self.driver.find_element(*self.__CART_POPUP)
+        self.click(self.__ADD_TO_CART_BUTTON)
+        return self.get_element(self.__CART_POPUP)
 
     def close_cart_popup(self):
-        self.driver.find_element(*self.__CLOSE_CART_POPUP).click()
+        self.click(self.__CLOSE_CART_POPUP)
 
     # CHECK IF THIS WORKS!!
     def asserting(self, element):
-        return self.driver.find_element(*element)
+        return self.get_element(element)
 
     # Check if the assert works
     def hover_on_cart(self):
@@ -34,12 +34,17 @@ class ShoppingCart(BasePage):
         # action.move_to_element(hover_cart)
         action.move_to_element(self.driver.find_element(*self.__HOVERING_CART)).perform()
         print(self.driver.find_element(*self.__HOVERING_CART).get_attribute("title"))
-        # return self.driver.find_element(By.CSS_SELECTOR, ".products > .first_item")
-        # if not self.asserting(self.__PRODUCT_IN_CART):
-        #     return
+
+    def hover_2(self):
+        # self.hover_element(self.__HOVERING_CART)
+        self.hover_element(self.__HOVERING_CART)
 
     def check_product_in_hover(self):
-        return self.driver.find_element(*self.__PRODUCT_IN_CART)
+        return self.get_element(self.__PRODUCT_IN_CART)
 
     def click_checkout_button(self):
-        self.driver.find_element(*self.__CART_CHECKOUT_BUTTON).click()
+        self.click(self.__CART_CHECKOUT_BUTTON)
+        # self.hover_click(self.__CART_CHECKOUT_BUTTON)
+
+    def temp_find_element(self):
+        return self.get_element(self.__HOVERING_CART)
