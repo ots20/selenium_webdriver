@@ -51,7 +51,7 @@ class TestSeleniumWebDriver(unittest.TestCase):
         self.assertTrue(check_page_title)
         check_search_block = self.search_page.check_search_results_section()
         self.assertTrue(check_search_block)
-        time.sleep(5)
+        # time.sleep(5)
         nodes = self.search_page.results_found_number()
         self.assertEqual(len(nodes), 5)
         # time.sleep(20)
@@ -87,7 +87,7 @@ class TestSeleniumWebDriver(unittest.TestCase):
         # search field: send keys & clicking search button
         self.search_field.search_item()
         self.search_field.click_search_icon()
-        time.sleep(5)
+        # time.sleep(5)
         # search page: change view icon and checking there are results
         nodes = self.search_page.results_found_number()
         self.assertTrue(len(nodes) > 0)
@@ -99,7 +99,7 @@ class TestSeleniumWebDriver(unittest.TestCase):
         self.shopping_cart.close_cart_popup()
         time.sleep(3)
         # hover the cart
-        # self.shopping_cart.hover_on_cart()
+        self.shopping_cart.hover_on_cart()
         # self.shopping_cart.hover_2()
 
         # asserting there is a product in the cart
@@ -127,7 +127,7 @@ class TestTempHover(unittest.TestCase):
         # search field: send keys & button - OK
         self.driver.find_element(By.ID, "search_query_top").send_keys("Dress")
         self.driver.find_element(By.XPATH, "//button[@name='submit_search']").click()
-        time.sleep(5)
+        # time.sleep(5)
         # search page: change view icon - OK
         self.driver.find_element(By.CLASS_NAME, "icon-th-list").click()
         self.assertTrue(self.driver.find_element(By.ID, "center_column"))

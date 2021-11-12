@@ -1,3 +1,5 @@
+import time
+
 from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 
@@ -30,6 +32,7 @@ class ShoppingCart(BasePage):
     # Check if the assert works
     def hover_on_cart(self):
         # hover_cart = self.driver.find_element(*self.__HOVERING_CART)
+        # time.sleep(5)
         action = ActionChains(self.driver)
         # action.move_to_element(hover_cart)
         action.move_to_element(self.driver.find_element(*self.__HOVERING_CART)).perform()
