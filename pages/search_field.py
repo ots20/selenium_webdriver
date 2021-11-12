@@ -1,12 +1,8 @@
 from selenium.webdriver.common.by import By
-
 from pages.base_page import BasePage
 
 
 class SearchField(BasePage):
-
-    # def __init__(self, driver):
-    #     self.driver = driver
 
     __SEARCH_FIELD = (By.ID, "search_query_top")
     __ELASTIC_SEARCH = (By.CSS_SELECTOR, ".ac_results > ul > li")

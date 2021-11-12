@@ -1,13 +1,8 @@
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.select import Select
-
 from pages.base_page import BasePage
 
 
 class RegistrationForm(BasePage):
-
-    # def __init__(self, driver):
-    #     self.driver = driver
 
     __GENDER_SELECT = (By.ID, "id_gender1")
     __FIRST_NAME = (By.ID, "customer_firstname")
@@ -24,31 +19,17 @@ class RegistrationForm(BasePage):
     __REG_SUBMIT_BUTTON = (By.ID, "submitAccount")
 
     def fill_registration_form(self):
-        # self.driver.find_element(*self.__GENDER_SELECT).click()
-        # self.driver.find_element(*self.__FIRST_NAME).send_keys("firstName")
-        # self.driver.find_element(*self.__LAST_NAME).send_keys("LastName")
-        # self.driver.find_element(*self.__REG_PASSWORD).send_keys("Test123")
         self.click(self.__GENDER_SELECT)
         self.fill(self.__FIRST_NAME, "firstName")
         self.fill(self.__LAST_NAME, "LastName")
         self.fill(self.__REG_PASSWORD, "Test123")
 
-        # Select(self.driver.find_element(*self.__BIRTH_DAY)).select_by_value("15")
-        # Select(self.driver.find_element(*self.__BIRTH_MONTH)).select_by_value("1")
-        # Select(self.driver.find_element(*self.__BIRTH_YEAR)).select_by_value("2000")
         self.select_dropdown_value(self.__BIRTH_DAY, '15')
         self.select_dropdown_value(self.__BIRTH_MONTH, '1')
         self.select_dropdown_value(self.__BIRTH_YEAR, '2000')
 
-        # self.driver.find_element(*self.__ADDRESS_MAIN).send_keys("address 1")
-        # self.driver.find_element(*self.__ADDRESS_CITY).send_keys("City")
         self.fill(self.__ADDRESS_MAIN, 'address 1')
         self.fill(self.__ADDRESS_CITY, 'City')
-
-        # Select(self.driver.find_element(*self.__DROPDOWN_STATE)).select_by_value("1")
-        # self.driver.find_element(*self.__ZIP_CODE).send_keys("12123")
-        # self.driver.find_element(*self.__PHONE).send_keys("511111111")
-        # self.driver.find_element(*self.__REG_SUBMIT_BUTTON).click()
 
         self.select_dropdown_value(self.__DROPDOWN_STATE, '1')
         self.fill(self.__ZIP_CODE, '12345')
