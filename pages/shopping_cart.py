@@ -19,6 +19,9 @@ class ShoppingCart(BasePage):
     def close_cart_popup(self):
         self.click(self.__CLOSE_CART_POPUP)
 
+    def check_popup_closed(self):
+        self.check_element_closed(self.__CART_POPUP)
+
     # method not used
     def hover_on_cart2(self):
         action = ActionChains(self.driver)

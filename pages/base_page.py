@@ -22,7 +22,7 @@ class BasePage:
         if not self.driver:
             BasePage.driver = BasePage.__WebDriver().driver
             print("driver initialized")
-        self.explicitly_wait = WebDriverWait(driver=self.driver, timeout=30)
+        self.explicitly_wait = WebDriverWait(driver=self.driver, timeout=5)
 
     def quit_driver(self):
         self.driver.quit()
@@ -59,6 +59,11 @@ class BasePage:
         self.explicitly_wait.until(expected_conditions.presence_of_element_located(by_locator),
                                    message=f"'{by_locator}' cannot fill element, not present in the page")
         self.driver.find_element(*by_locator).send_keys(value)
+
+    def check_element_closed(self, by_locator):
+        self.explicitly_wait.until(expected_conditions.invisibility_of_element(by_locator),
+                                   message=f"'{by_locator}' popUp still visible!")
+        print("element is not visible")
 
     def hover_element(self, by_locator):
         self.explicitly_wait.until(expected_conditions.element_to_be_clickable(by_locator),

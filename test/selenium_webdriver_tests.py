@@ -104,6 +104,7 @@ class TestSeleniumWebDriver(unittest.TestCase, BasePage):
         # closing cart popup
         self.shopping_cart.close_cart_popup()
         # hover the cart
+        self.shopping_cart.check_popup_closed()
         self.shopping_cart.hover_on_cart()
         # self.shopping_cart.hover_on_cart2()
         # asserting there is a product in the cart
