@@ -1,4 +1,3 @@
-from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 from pages.base_page import BasePage
 
@@ -21,11 +20,6 @@ class ShoppingCart(BasePage):
 
     def check_popup_closed(self):
         self.check_element_closed(self.__CART_POPUP)
-
-    # method not used
-    def hover_on_cart2(self):
-        action = ActionChains(self.driver)
-        action.move_to_element(self.driver.find_element(*self.__HOVERING_CART)).perform()
 
     def hover_on_cart(self):
         self.hover_element(self.__HOVERING_CART)

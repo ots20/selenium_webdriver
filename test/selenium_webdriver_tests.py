@@ -1,13 +1,4 @@
-import time
 import unittest
-
-from selenium import webdriver
-from selenium.webdriver import ActionChains
-from selenium.webdriver.common.by import By
-from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.support.select import Select
-from webdriver_manager.chrome import ChromeDriverManager
-
 from pages.base_page import BasePage
 from pages.account_page import AccountPage
 from pages.authorization_header import AuthorizationHeader
@@ -20,18 +11,6 @@ from pages.shopping_cart import ShoppingCart
 
 
 class TestSeleniumWebDriver(unittest.TestCase, BasePage):
-
-    # def setUp(self) -> None:
-    #     print("setting up")
-    #     self.search_field = SearchField()
-    #     self.search_page = SearchPage()
-    #     self.authorization_header = AuthorizationHeader()
-    #     self.authorization_page = AuthorizationPage()
-    #     self.account_page = AccountPage()
-    #     self.registration_form = RegistrationForm()
-    #     self.shopping_cart = ShoppingCart()
-    #     self.order_page = OrderPage()
-    #     self.go_to_url(url='http://automationpractice.com/index.php')
 
     @classmethod
     def setUpClass(cls) -> None:
@@ -50,17 +29,12 @@ class TestSeleniumWebDriver(unittest.TestCase, BasePage):
         print("TC - test_search")
         # search field - OK
         self.search_field.search_item()
-
         # search field: elastic search - OK
         elastic_search = self.search_field.elastic_search_check()
         self.assertEqual(len(elastic_search), 5)
-
         # search field: search button - OK
         self.search_field.click_search_icon()
-
         # search page
-        # check_page_title = self.search_page.check_page_title()
-        # self.assertTrue(check_page_title)
         check_search_block = self.search_page.check_search_results_section()
         self.assertTrue(check_search_block)
         nodes = self.search_page.results_found_number()
@@ -70,17 +44,10 @@ class TestSeleniumWebDriver(unittest.TestCase, BasePage):
         print("TC - registration")
         # authorization header: click sign in button
         self.authorization_header.click_sign_in()
-
         # authorization page: fill email field
         self.authorization_page.register_email()
-
         # registration form: data fields and buttons
         self.registration_form.fill_registration_form()
-
-        # account page:
-        # check_account_page_url = self.account_page.check_account_page()
-        # self.assertTrue(check_account_page_url)
-
         # authorization header: user name displayed and logout button
         header_name_display = self.authorization_header.check_user_name_account_page()
         self.assertTrue(header_name_display)
