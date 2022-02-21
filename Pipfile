@@ -6,6 +6,8 @@ name = "pypi"
 [packages]
 selenium = "*"
 webdriver-manager = "*"
+behave = "*"
+pyhamcrest = "*"
 
 [dev-packages]
 

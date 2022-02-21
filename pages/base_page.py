@@ -46,7 +46,7 @@ class BasePage:
                                    message=f"'{title}' not expected title")
 
     def __wait_for_element_invisibility(self, by_locator):
-        self.explicitly_wait.until(expected_conditions.invisibility_of_element(by_locator),
+        self.explicitly_wait.until(expected_conditions.visibility_of_element_located(by_locator),
                                    message=f"'{by_locator}' popUp still visible!")
 
     # ================= Browser methods =================
