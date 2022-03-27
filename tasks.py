@@ -9,3 +9,4 @@ def run(context, tags="", browser=""):
     if tags != "":
         behave_cmd = f"{behave_cmd} --tags={tags}"
     context.run(behave_cmd)
+    
