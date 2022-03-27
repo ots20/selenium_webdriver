@@ -2,6 +2,7 @@
 Feature: Add to cart
   As an user I should be able to add the searched item to the cart
 
+  @shopping
   Scenario: Add item to cart
     When I search an item
     Then the search page displays the results

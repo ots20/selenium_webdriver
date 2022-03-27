@@ -2,6 +2,7 @@
 Feature: Registration
   As a user I should be able to register using my email
 
+  @registration
   Scenario: Registration form display
     When I click the sign-in button
     And I register my e-mail

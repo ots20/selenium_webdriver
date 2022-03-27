@@ -1,3 +1,4 @@
+from behave.runner import Context
 from selenium import webdriver
 from selenium.webdriver import ActionChains
 from selenium.webdriver.chrome.service import Service
@@ -9,18 +10,18 @@ from webdriver_manager.chrome import ChromeDriverManager
 
 class BasePage:
 
-    class __WebDriver:
-        def __init__(self):
-            s = Service(ChromeDriverManager().install())
-            self.driver = webdriver.Chrome(service=s)
-            self.driver.set_window_size(1440, 900)
+    # class __WebDriver:
+    #     def __init__(self):
+    #         s = Service(ChromeDriverManager().install())
+    #         self.driver = webdriver.Chrome(service=s)
+    #         self.driver.set_window_size(1440, 900)
+    #
+    # driver = None
 
-    driver = None
-
-    def __init__(self):
-        if not self.driver:
-            BasePage.driver = BasePage.__WebDriver().driver
-            print("driver initialized")
+    def __init__(self, context: Context):
+        # if not self.driver:
+        #     BasePage.driver = BasePage.__WebDriver().driver
+        self.driver = context.driver
         self.explicitly_wait = WebDriverWait(driver=self.driver, timeout=10)
 
     # ================= Private methods =================

@@ -2,6 +2,7 @@
 Feature: Search
   As a user I should be able to search for an item in the search field
 
+  @shopping
   Scenario: Searching and displaying results
     When I type "printed dress" in the search field
     Then five results are displayed under the search field
