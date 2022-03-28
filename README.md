@@ -9,13 +9,13 @@ Topic Classic framework - In this branch 'classic_framework' you will find the f
 
 SETUP <br />
 1.- open a terminal <br />
-2.- run git clone git@github.com:https://github.com/ots20/selenium_webdriver.git to clone the repository <br />
-3.- run cd bootcamp_selenium_classic_framework to move to local repository folder <br />
-4.- run pipenv install -d to set up all the dependencies from Pipfile.lock <br />
-5.- run pipenv shell in order to usee pipenv dependencies from the terminal <br />
+2.- run `git clone https://github.com/ots20/selenium_webdriver.git` to clone the repository <br />
+3.- run `cd bootcamp_selenium_classic_framework` to move to local repository folder <br />
+4.- run `pipenv install -d` to set up all the dependencies from Pipfile.lock <br />
+5.- run `pipenv shell` in order to use pipenv dependencies from the terminal <br />
 
 -------------------------
 
 EXECUTION <br />
 1.- open a terminal <br />
-2.- run python3 -m unittest test/selenium_webdriver_tests.py <br />
+2.- run `python3 -m unittest test/selenium_webdriver_tests.py` <br />
