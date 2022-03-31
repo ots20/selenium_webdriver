@@ -4,6 +4,7 @@ from pages.base_page import BasePage
 
 class RegistrationForm(BasePage):
 
+    __REG_FORM = (By.ID, "account-creation_form")
     __GENDER_SELECT = (By.ID, "id_gender1")
     __FIRST_NAME = (By.ID, "customer_firstname")
     __LAST_NAME = (By.ID, "customer_lastname")
@@ -17,6 +18,9 @@ class RegistrationForm(BasePage):
     __ZIP_CODE = (By.ID, "postcode")
     __PHONE = (By.ID, "phone_mobile")
     __REG_SUBMIT_BUTTON = (By.ID, "submitAccount")
+
+    def check_reg_form_display(self):
+        return self.get_element(self.__REG_FORM)
 
     def fill_registration_form(self):
         self.click(self.__GENDER_SELECT)
