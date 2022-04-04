@@ -12,8 +12,7 @@ def step_impl(context):
 @then("five results are displayed under the search field")
 def step_impl(context):
     elastic_search = context.search_field.elastic_search_check()
-    # change to 5
-    assert_that(len(elastic_search), is_(1))
+    assert_that(len(elastic_search), is_(5))
 
 
 @when("I click the search icon")
