@@ -1,3 +1,5 @@
+from allure import attach, attachment_type
+
 from pages.account_page import AccountPage
 from pages.authorization_header import AuthorizationHeader
 from pages.authorization_page import AuthorizationPage
@@ -25,6 +27,9 @@ def before_all(context):
     # Opening the page
     context.search_page.go_to_url(url='http://automationpractice.com/index.php')
 
+def after_scenario(context, scenario):
+    if scenario.status == "failed":
+        attach(context.driver.get_screenshot_as_png(), attachment_type=attachment_type.PNG)
 
 def after_all(context):
     context.search_page.quit_driver()
