@@ -9,6 +9,7 @@ webdriver-manager = "*"
 behave = "*"
 pyhamcrest = "*"
 invoke = "*"
+allure-behave = "*"
 
 [dev-packages]
 
